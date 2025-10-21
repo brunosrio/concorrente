@@ -1,0 +1,6 @@
+Não houve alteração na ordem de execução das tarefas nem das sub-etapas entre as execuções.
+Como o tempo de execução de cada verificação pode durar entre 1 segundo e 3 segundos,
+O tempo mínimo de execução do programa seria 9 segundos, isso aconteceria no cenário onde cada uma das 5 verificações demoraria apenas 1 segundo para executar,
+mais o acréscimo do tempo fixo de 4 segundos, resultando em 9 segundos de tempo mínimo.
+O tempo máximo de execução do programa 19 segundos, isso aconteceria no cenário onde cada uma das 5 verificações demoraria 3 segundos para executar,
+mais o acréscimo do tempo fixo de 4 segundos, resultando em 19 segundos de tempo máximo. 

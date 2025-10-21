@@ -1,0 +1,12 @@
+Q1 - O log de fim do programa java vem antes de alguns logs de verificação de recursos.
+    - A log de inicio da verificação de recursos aparece antes do log do fim da configuração de logs.
+    - Os logs indicam que as tarefas não estão sincronizadas como deveriam.
+
+Q2 - A identificação dos prints gerados por cada thread ficou mais fácil.
+
+Q3 - Através dos logs, a thread main inicia antes das outras duas threads com as tarefas,
+    mas o log do término de execução da thread main aparece antes dos logs de término das outras duas threds.
+    Ou seja, pelos logs é possível perceber que a thread main é encerrada antes das outras duas threads com as tarefas.
+
+Q4 - Agora o fluxo de execução foi alterado, o log de término da thread main só aparece após o log de término das outras duas threads com as tarefas.
+    Ou seja, agora a thread main só é finalizada quando as outras duas threads com as tarefas tiverem terminado sua execução.
