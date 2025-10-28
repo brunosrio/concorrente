@@ -1,0 +1,2 @@
+Usei uma array para guardar as maiores notas, cada turma atualiza apenas uma posição.
+Cada turma atualiza apenas um index do array, assim evitando uma condição de corrida, pois cada thread atualiza apenas 1 endereço de memória.

@@ -1,0 +1,4 @@
+Não houve alteração na ordem de execução das correções.
+O código foi executado para 2 turmas com 10 alunos cada, 3 vezes.
+Em todas as execuções os logs de correção da turma 1 iniciaram e terminaram antes dos logs de correção da turma 2.
+Dentro de cada turma, a correção também foi sequencial, sempre iniciando com o aluno de menor id da turma até o aluno de maior id.
