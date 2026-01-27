@@ -1,0 +1,4 @@
+Com o controle de concorrência seguro implementato o resultado está conforme o esperado, em ambas as novas versões:
+- O somatório dos usuários que fizeram ou não algo 
+    no sistema está igual ao resultado apresentado pelo contador de usuários que acessaram o sistema;
+- O contador de usuários online está sempre zerado ao final da execução.

@@ -1,0 +1,6 @@
+A falta de controle de concorrêcia leva os contadores a assumirem valores errados no final da execução.
+
+- O somatório dos usuários que fizeram ou não algo no sistema 
+nem sempre bate com o total de usuários que acessaram o sistema;
+- Era esperado que o número de usuários online estivesse zerado ao final da execução, o que não está acontecendo.
+
