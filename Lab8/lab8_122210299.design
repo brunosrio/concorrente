@@ -1,0 +1,30 @@
+Como o sistema possui um perfil de carga onde as operações de leitura (consultas de arquivos ou IPs) 
+são muito mais frequentes que as operações de escrita (registro ou remoção de arquivos) foi optado por usar
+sync.RWMutex em vez de sync.Mutex. O RWMutex permite que múltiplas goroutines realizem leituras simultâneas (RLock),
+bloqueando apenas quando uma escrita (Lock) é necessária. Isso aumenta desempenho e a vazão do sistema 
+em comparação a um bloqueio total para qualquer operação.
+
+Servidor:
+O servidor mantém o estado global da rede (hashMap e clientData). 
+Como cada conexão de cliente gera uma nova goroutine, o acesso a esses mapas é concorrente.
+Para fazer o controle de acesso aos mapas, foi utilizado o mu.Lock() nas funções
+handleStoreRequest, handleCreateRequest, handleDeleteRequest e cleanupClientData.
+O bloqueio exclusivo é necessário para impedir que dois clientes alterem o estado ao mesmo tempo, 
+o que corromperia a memória, ou que um cliente leia um estado inconsistente durante uma atualização.
+
+Na handleQueryRequest foi utilizado o s.mu.RLock().
+Isso permite que várias queries aconteçam ao mesmo tempo, mas impede escritas durante a leitura.
+Durante a leitura, foi realizada uma cópia (snapshot) dos IPs encontrados para um slice local antes de liberar o lock.
+Isso minimiza o tempo de bloqueio. Se retivéssemos o lock durante todo o processo de envio pela rede,
+o servidor ficaria inacessível para escritas por um tempo imprevisível (gargalo de I/O).
+
+Cliente:
+O cliente possui concorrência entre a detecção de mudanças no sistema de arquivos e o atendimento de downloads 
+por outros peers. Foi adicionado o mu.Lock() na função updateServer() pois ela é chamada pelo monitorDirectory 
+sempre que um arquivo é criado ou removido. Como a goroutine do fsnotify roda em paralelo, 
+foi preciso garantir acesso exclusivo ao hashMap do cliente antes de adicionar ou remover entradas. 
+O bloqueio ocorre estritamente durante a atualização do mapa na memória, liberando o recurso rapidamente.
+
+Foi adicionado um mu.RLock() na handleDownloadRequest() para que enquanto é lido o caminho do arquivo no mapa, a 
+goroutine de monitoramento não remova essa entrada, dado que o arquivo pode ser deletado no mesmo instante, 
+prevenindo condições de corrida e leituras inconsistentes.
