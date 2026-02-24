@@ -1,0 +1,4 @@
+O professor pediu para explicar apenas o uso do tipo ExecutorService escolhido.
+
+-- O Executors.newCachedThreadPool() foi escolhido pois cria uma quantidade de Threads sob demanda;
+   o problema dele é quando um número muito grande de threads pode se criado, mas nesse caso de exemplo isso não aconteceria;
