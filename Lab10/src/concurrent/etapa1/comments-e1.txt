@@ -1,0 +1,10 @@
+Com um tempo de consumo muito menor que o tempo de producao
+o programa trava varias vezes com o consumidor bloqueado esperando o produtor adicionar algo no buffer, 
+o produtor nunca chega a bloquear pois um consumidor sempre está aguardando para consumir, impedindo que o limite de 100 do buffer seja alcançado.
+
+Com um tempo de producao muito menor que o tempo de consumo
+o programa trava varias vezes com o produtor bloqueado esperando o consumidor retirar algo do buffer,
+pois o produtor consegue adicionar itens em sequencia chegando na capacidade máxima de 100 do buffer e ficando bloqueado até que um consumidor retire algo.
+
+
+

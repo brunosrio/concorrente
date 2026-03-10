@@ -1,0 +1,8 @@
+Quando o tempo de consumo é muito menor que o tempo de produção
+e a diferença entre eles é maior que o timeout de 600 milisegundos, pode acontecer
+do consumidor ficar bloqueado e encerrar o consumo pois alcançou o tempo de timeout definido, nesse caso o programa nem esperaria
+alcançar o limite de produção definido para encerrar, o programa encerra pois o buffer ficou vazio o consumidor esperou até o tempo definido de timeout;
+
+Quando o tempo de produção é muito menor que o tempo de consumo
+o consumidor dificilmente vai ficar bloqueado e alcançar o tempo de timeout, pois sempre vai ter algo no buffer,
+nesse caso, o programa só vai encerrar quando o produtor chegar no limite de produção definido.
